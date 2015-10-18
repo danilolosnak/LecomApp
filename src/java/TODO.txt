@@ -1,0 +1,26 @@
+CREATE SEQUENCE usuario_seq;
+CREATE TABLE usuario (
+  id serial NOT NULL PRIMARY KEY,
+  nome varchar(30) not null,
+  telefone varchar(30)
+);
+ALTER TABLE usuario ALTER id SET DEFAULT NEXTVAL('usuario_seq');
+
+CREATE SEQUENCE servico_seq;
+CREATE TABLE servico (
+  id serial NOT NULL PRIMARY KEY,
+  nome varchar(30) not null
+);
+ALTER TABLE servico ALTER id SET DEFAULT NEXTVAL('servico_seq');
+
+
+
+CREATE SEQUENCE ClienteServico_seq;
+CREATE TABLE ClienteServico (
+  usuario_servico_id serial NOT NULL PRIMARY KEY,
+  usuario_id int NOT NULL REFERENCES servico(id),
+  servico_id int NOT NULL REFERENCES usuario(id),
+  data_inicio date NOT NULL,
+  data_fim date NOT NULL
+);
+ALTER TABLE ClienteServico ALTER usuario_servico_id SET DEFAULT NEXTVAL('ClienteServico_seq');
